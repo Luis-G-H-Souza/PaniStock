@@ -38,6 +38,6 @@ export class User {
   sales: Sale[]
 
   @OneToMany(() => Stock, (stock) => stock.user_id)
-  stock: Stock[]
+  stock: Stock
 
 }

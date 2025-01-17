@@ -21,7 +21,7 @@ export class Product {
   price: number
 
   @Column()
-  CODE: string
+  barCode: string
 
   @CreateDateColumn()
   creatAt: Date
