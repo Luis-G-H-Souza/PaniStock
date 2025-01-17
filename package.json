@@ -1,5 +1,5 @@
 {
-  "name": "anout24_d02_compasscar_ronnabyte",
+  "name": "smoke-track",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -30,7 +30,7 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/swagger": "^8.1.0",
     "@nestjs/typeorm": "^10.0.2",
-    "anout24_d02_compasscar_ronnabyte": "file:",
+    "smoke-track": "file:",
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
