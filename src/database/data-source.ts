@@ -9,7 +9,8 @@ import { Sale } from "src/entities/sale.entities";
 import { SaleItem } from "src/entities/sales-item.entities";
 import { Stock } from "src/entities/stock.entities";
 import { StockMoviment } from "src/entities/stock-moviment.entities";
-import path from "path";
+import { BarCode } from "src/entities/barcode.entities";
+import { Price } from "src/entities/price.entities";
 
 dotenv.config();
 
@@ -20,10 +21,11 @@ export const dataSourceOptions: DataSourceOptions = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: 'smoke-track',
-  entities: [User, Product, Sale, SaleItem, Stock, StockMoviment],
+  entities: [User, Product, Sale, SaleItem, Stock, StockMoviment, BarCode, Price],
   synchronize: true,
   migrations: [__dirname + "/../migrations/*.ts"],
-  logging: true
+  logging: true,
+  //dropSchema: true,
 }
 
 export const AppDataSource = new DataSource(dataSourceOptions);
