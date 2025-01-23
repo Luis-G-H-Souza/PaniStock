@@ -1,24 +1,37 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from 'src/entities/product.entities';
 import { Repository } from 'typeorm';
+import { BarCode } from 'src/entities/barcode.entities';
+import { Price } from 'src/entities/price.entities';
+
 
 @Injectable()
 export class ProductsService {
   constructor(
     @InjectRepository(Product)
-    private readonly productRepository: Repository<Product>
+    private readonly productRepository: Repository<Product>,
+    @InjectRepository(BarCode)
+    private readonly barcodeRepository: Repository<BarCode>,
+    @InjectRepository(Price)
+    private readonly priceRepository: Repository<Price>
   ) {}
-  async create(createProductDto: CreateProductDto) {
+  async create(createProductDto: CreateProductDto, barCode: string, price: number) {
     const prodExist = await this.productRepository.findOne({
       where: {
-        barCode: createProductDto.barCode,
+        name: createProductDto.name,
       },
     })
 
-    if (prodExist) {
+    const codeExist = await this.barcodeRepository.findOne({
+      where: {
+        barCode
+      }
+    })
+
+    if (prodExist || codeExist) {
       throw new ConflictException('Product already registered.')
     }
     
@@ -27,15 +40,45 @@ export class ProductsService {
       creatAt: new Date(),
     })
 
-    return this.productRepository.save(product)
+    const saveProduct = await this.productRepository.save(product)
+
+    const barcodeEntitie = await this.barcodeRepository.create({
+      barCode,
+      id_product: product.id
+    })
+
+    const saveBarcode = await this.barcodeRepository.save(barcodeEntitie)
+
+    const priceEntitie = await this.priceRepository.create({
+      price,
+      id_product: product.id
+    })
+
+    const savePrice = await this.priceRepository.save(priceEntitie)
+
+    return { product: saveProduct, barcode: barcodeEntitie, price: priceEntitie}
   }
 
-  findAll() {
-    return `This action returns all products`;
+  async findAll() {
+    const list = this.productRepository.find({
+    relations: ['barcode', 'price'],
+  })
+    return list
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(barcode: string) {
+    const prodExist = await this.barcodeRepository.findOne({
+      where: {
+        barCode: barcode
+      }
+    })
+
+    if (!prodExist) {
+      throw new NotFoundException('Product not found.')
+    }
+
+    return prodExist
+
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {

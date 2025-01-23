@@ -10,13 +10,17 @@ import { Product } from './entities/product.entities';
 import { DatabaseModule } from './database/data-source';
 import { Stock } from './entities/stock.entities';
 import { User } from './entities/user.entities';
+import { BarCode } from './entities/barcode.entities';
+import { BarcodeModule } from './barcode/barcode.module';
+import { PricesModule } from './prices/prices.module';
+import { Price } from './entities/price.entities';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forFeature([Product, Stock, User]),
+    TypeOrmModule.forFeature([Product, Stock, User, BarCode, Price]),
     DatabaseModule,
-    ProductsModule, SalesModule, StockModule],
+    ProductsModule, SalesModule, StockModule, BarcodeModule, PricesModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,4 +1,4 @@
-import { IsDecimal, IsInt, IsNotEmpty, IsNumber, IsString, Min } from "class-validator";
+import { IsDecimal, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, Min } from "class-validator";
 
 export class CreateProductDto {
   @IsNotEmpty()
@@ -7,10 +7,9 @@ export class CreateProductDto {
 
   @IsNotEmpty()
   @IsNumber()
-  @Min(0.05)
-  price: number;
+  cost_price: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  barCode: string;
+  description?: string;
 }
