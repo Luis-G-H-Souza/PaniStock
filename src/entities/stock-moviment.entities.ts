@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./user.entities";
 import { Product } from "./product.entities";
 
@@ -20,5 +20,8 @@ export class StockMoviment {
 
   @Column()
   date: Date
+
+  @CreateDateColumn()
+  creatAt: Date
   
 }

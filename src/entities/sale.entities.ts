@@ -37,4 +37,5 @@ export class Sale {
 
   @CreateDateColumn()
   transaction_date: Date
+
 }

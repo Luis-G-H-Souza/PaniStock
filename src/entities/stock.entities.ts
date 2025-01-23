@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./user.entities";
 import { Product } from "./product.entities";
 
@@ -25,4 +25,7 @@ export class Stock {
 
   @Column()
   supplier: string
+
+  @CreateDateColumn()
+  creatAt: Date
 }
