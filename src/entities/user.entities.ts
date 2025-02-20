@@ -1,6 +1,13 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Sale } from "./sale.entities";
-import { Stock } from "./stock.entities";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Sale } from './sale.entities';
+import { Stock } from './stock.entities';
 
 export enum UserFunction {
   ADMIN = 'admin',
@@ -11,33 +18,32 @@ export enum UserFunction {
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column()
-  name: string
+  name: string;
 
   @Column({ unique: true })
-  email: string
+  email: string;
 
   @Column()
-  password: string
+  password: string;
 
   @Column({
     type: 'enum',
     enum: UserFunction,
   })
-  function: UserFunction 
+  function: UserFunction;
 
   @CreateDateColumn()
-  createAt: Date
+  createAt: Date;
 
   @UpdateDateColumn()
-  updateAt: Date
+  updateAt: Date;
 
   @OneToMany(() => Sale, (sale) => sale.user_id)
-  sales: Sale[]
+  sales: Sale[];
 
   @OneToMany(() => Stock, (stock) => stock.user_id)
-  stock: Stock
-
+  stock: Stock;
 }

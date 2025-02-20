@@ -20,7 +20,12 @@ import { Price } from './entities/price.entities';
     ConfigModule.forRoot(),
     TypeOrmModule.forFeature([Product, Stock, User, BarCode, Price]),
     DatabaseModule,
-    ProductsModule, SalesModule, StockModule, BarcodeModule, PricesModule],
+    ProductsModule,
+    SalesModule,
+    StockModule,
+    BarcodeModule,
+    PricesModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,18 +1,29 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Product } from "./product.entities";
-
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Product } from './product.entities';
 
 @Entity('bar-code')
 export class BarCode {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column()
-  barCode: string
+  barCode: string;
 
-  @ManyToOne(() => Product, (product) => product.id)
-  id_product: number
+  @ManyToOne(() => Product, (product) => product.barcode)
+  product: Product;
+
+  @Column()
+  id_product: number;
 
   @CreateDateColumn()
-  creatAt: Date
+  creatAt: Date;
+
+  @Column({ type: 'boolean', default: true })
+  isActive: boolean;
 }

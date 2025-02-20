@@ -1,27 +1,29 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./user.entities";
-import { Product } from "./product.entities";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 export enum StockFunction {
   ENTRY = 'entry',
   EXIT = 'exit',
 }
 
-Entity('stock-moviment')
+Entity('stock-moviment');
 export class StockMoviment {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column({
     type: 'enum',
     enum: StockFunction,
   })
-  moviment: StockFunction
+  moviment: StockFunction;
 
   @Column()
-  date: Date
+  date: Date;
 
   @CreateDateColumn()
-  creatAt: Date
-  
+  creatAt: Date;
 }

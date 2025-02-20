@@ -1,6 +1,13 @@
-import { Column, CreateDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./user.entities";
-import { SaleItem } from "./sales-item.entities";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { User } from './user.entities';
+import { SaleItem } from './sales-item.entities';
 
 export enum PaymentFunction {
   CREDIT_CARD = 'credit_card',
@@ -12,30 +19,29 @@ export enum PaymentFunction {
 @Entity('sale')
 export class Sale {
   @PrimaryGeneratedColumn()
-  transaction_id: number
+  transaction_id: number;
 
   @ManyToOne(() => User, (user) => user.sales)
-  user_id: User
+  user_id: User;
 
   @OneToMany(() => SaleItem, (saleItem) => saleItem.sale)
-  salesItem: SaleItem[]
+  salesItem: SaleItem[];
 
   @Column('decimal', { precision: 10, scale: 2 })
-  total_price: number
+  total_price: number;
 
   @Column({
     type: 'enum',
     enum: PaymentFunction,
   })
-  payment_gateway: PaymentFunction
+  payment_gateway: PaymentFunction;
 
   @Column('decimal', { precision: 10, scale: 2 })
-  discount: number
+  discount: number;
 
   @Column('varchar')
-  barcode_scanned: string
+  barcode_scanned: string;
 
   @CreateDateColumn()
-  transaction_date: Date
-
+  transaction_date: Date;
 }

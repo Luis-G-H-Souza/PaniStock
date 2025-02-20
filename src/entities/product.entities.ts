@@ -1,36 +1,48 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { SaleItem } from "./sales-item.entities";
-import { Stock } from "./stock.entities";
-import { BarCode } from "./barcode.entities";
-import { Price } from "./price.entities";
-
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { SaleItem } from './sales-item.entities';
+import { Stock } from './stock.entities';
+import { BarCode } from './barcode.entities';
+import { Price } from './price.entities';
 
 @Entity('product')
 export class Product {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @OneToMany(() => SaleItem, (saleitem) => saleitem.product)
-  saleItem: SaleItem[]
+  saleItem: SaleItem[];
 
   @OneToMany(() => Stock, (stock) => stock.product_id)
-  stock: Stock[]
+  stock: Stock[];
 
-  @OneToMany(() => BarCode, (barcode) => barcode.id_product)
-  barcode: BarCode[]
+  @OneToMany(() => BarCode, (barcode) => barcode.product)
+  barcode: BarCode[];
 
   @Column()
-  name: string
+  name: string;
 
-  @OneToMany(() => Price, (price) => price.id_product)
-  price: Price[]
+  @OneToMany(() => Price, (price) => price.product)
+  price: Price[];
 
   @Column('decimal', { precision: 10, scale: 2 })
-  cost_price: number
-  
+  cost_price: number;
+
   @CreateDateColumn()
-  creatAt: Date
+  creatAt: Date;
+
+  @UpdateDateColumn()
+  updateAt: Date;
 
   @Column({ nullable: true })
-  description?: string
+  description?: string;
+
+  @Column({ type: 'boolean', default: true })
+  isActive: boolean;
 }

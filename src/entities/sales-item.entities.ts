@@ -1,28 +1,33 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Sale } from "./sale.entities";
-import { Product } from "./product.entities";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Sale } from './sale.entities';
+import { Product } from './product.entities';
 
 @Entity('sale-item')
 export class SaleItem {
-
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @ManyToOne(() => Sale, (sale) => sale.salesItem)
-  sale: Sale[]
+  sale: Sale[];
 
   @ManyToOne(() => Product, (product) => product.saleItem)
-  product: Product[]
+  product: Product[];
 
   @Column()
-  quantity: number
+  quantity: number;
 
   @Column('decimal', { precision: 10, scale: 2 })
-  unit_price: number
+  unit_price: number;
 
   @Column('decimal', { precision: 10, scale: 2 })
-  total_price: number
+  total_price: number;
 
   @CreateDateColumn()
-  creatAt: Date
+  creatAt: Date;
 }
