@@ -3,7 +3,6 @@ import { BarcodeService } from './barcode.service';
 import { BarcodeController } from './barcode.controller';
 import { BarCode } from 'src/entities/barcode.entities';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProductsModule } from 'src/products/products.module';
 import { Product } from 'src/entities/product.entities';
 import { Price } from 'src/entities/price.entities';
 

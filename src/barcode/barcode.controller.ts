@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { BarcodeService } from './barcode.service';
 import { CreateBarcodeDto } from './dto/create-barcode.dto';
 import { UpdateBarcodeDto } from './dto/update-barcode.dto';
@@ -10,7 +18,8 @@ export class BarcodeController {
   @Post()
   create(
     @Body() createBarcodeDto: CreateBarcodeDto,
-    @Body('product') product: string ) {
+    @Body('product') product: string,
+  ) {
     return this.barcodeService.create(createBarcodeDto, product);
   }
 
