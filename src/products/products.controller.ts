@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -35,9 +36,15 @@ export class ProductsController {
     return this.productsService.findAll();
   }
 
-  @Get(':barcode')
+  /*@Get(':barcode')
   findOne(@Param('barcode') barcode: string) {
     return this.productsService.findOne(barcode);
+  }
+  */
+
+  @Get('search')
+  async searchProduct(@Query() query: {name?: string; barcode?: string }){
+    return this.productsService.searchPorduct(query)
   }
 
   @Patch(':barcode')

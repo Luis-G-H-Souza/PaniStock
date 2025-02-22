@@ -119,7 +119,7 @@ export class ProductsService {
     return list;
   }
 
-  async findOne(barcode: string) {
+  /*async findOne(barcode: string) {
     const barcodeExist = await this.barcodeRepository.findOne({
       where: {
         barCode: barcode,
@@ -147,6 +147,25 @@ export class ProductsService {
     console.log('Product ID:', barcodeExist.id_product);
 
     return prod;
+  }
+*/
+
+  async searchPorduct(query: { name?: string; barcode?: string}){
+  
+    const { name, barcode } = query;
+
+    if(!name && !barcode){
+      throw new BadRequestException('Enter the name, id or barcode of a product.')
+    }
+
+    return this.productRepository.createQueryBuilder('product')
+      .leftJoinAndSelect('product.barcode', 'barcode')
+      .leftJoinAndSelect('product.price', 'price')
+      .where('product.name ILIKE :name', { name: `%${name}%` })
+      .orWhere('barcode.barCode ILIKE :barcode', { barcode: `${barcode}%` })
+      .orderBy('product.name', 'ASC') // Ordena em ordem alfabética crescente (A-Z)
+      .limit(10)
+      .getMany();
   }
 
   async update(barcode: string, updateProductDto: UpdateProductDto) {
