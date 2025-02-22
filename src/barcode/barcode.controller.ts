@@ -23,23 +23,13 @@ export class BarcodeController {
     return this.barcodeService.create(createBarcodeDto, product);
   }
 
-  @Get()
-  findAll() {
-    return this.barcodeService.findAll();
+  @Get(':barcode')
+  findOne(@Param('barcode') barcode: string) {
+    return this.barcodeService.findOne(barcode);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.barcodeService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBarcodeDto: UpdateBarcodeDto) {
-    return this.barcodeService.update(+id, updateBarcodeDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.barcodeService.remove(+id);
+  @Delete(':barcode')
+  remove(@Param('barcode') barcode: string) {
+    return this.barcodeService.remove(barcode);
   }
 }

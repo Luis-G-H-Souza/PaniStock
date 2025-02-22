@@ -80,19 +80,37 @@ export class BarcodeService {
     return { product: prodExist, barcode: saveBarcode };
   }
 
-  findAll() {
-    return `This action returns all barcode`;
+  async findOne(barcode: string) {
+    const barcodeExist = await this.barcodeRepository.findOne({
+      where: {
+        barCode: barcode,
+      },
+      relations: ['product'],
+    });
+
+    if (!barcodeExist || barcodeExist.isActive === false) {
+      throw new NotFoundException('Product not found.');
+    }
+
+
+    return barcodeExist;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} barcode`;
-  }
+   async remove(barcode: string) {
+    const barcodeExist = await this.barcodeRepository.findOne({
+      where: {
+        barCode: barcode,
+      },
+    });
 
-  update(id: number, UpdateBarcodeDto: UpdateBarcodeDto) {
-    return `This action updates a #${id} barcode`;
-  }
+    if (!barcodeExist) {
+      throw new NotFoundException('Product not found.');
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} barcode`;
+    await this.barcodeRepository.update(barcodeExist.id, {
+      isActive: false,
+      updateAt: new Date(),
+    });
+    return;
   }
 }

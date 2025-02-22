@@ -4,6 +4,7 @@ import {
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Product } from './product.entities';
 
@@ -23,6 +24,9 @@ export class BarCode {
 
   @CreateDateColumn()
   creatAt: Date;
+
+  @UpdateDateColumn()
+    updateAt: Date;
 
   @Column({ type: 'boolean', default: true })
   isActive: boolean;
