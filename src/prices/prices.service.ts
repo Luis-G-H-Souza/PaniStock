@@ -4,11 +4,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { CreatePriceDto } from './dto/create-price.dto';
-import { UpdatePriceDto } from './dto/update-price.dto';
 import { Price } from 'src/entities/price.entities';
 import { Product } from 'src/entities/product.entities';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { BarCode } from 'src/entities/barcode.entities';
 
 @Injectable()
 export class PricesService {
@@ -17,6 +17,8 @@ export class PricesService {
     private readonly productRepository: Repository<Product>,
     @InjectRepository(Price)
     private readonly priceRepository: Repository<Price>,
+    @InjectRepository(BarCode)
+    private readonly barcodeRepository: Repository<BarCode>,
   ) {}
 
   async create(createPriceDto: CreatePriceDto, product: string) {
@@ -56,6 +58,7 @@ export class PricesService {
     }
     const newPrice = this.priceRepository.create({
       id_product: prodExist.id,
+      product: prodExist,
       price: validPrice,
       isActive: true,
     });
@@ -64,17 +67,36 @@ export class PricesService {
     return newPrice;
   }
 
-  findAll() {
-    return `This action returns all prices`;
+  async findOne(barcode: string) {
+    const barcodeExist = await this.barcodeRepository.findOne({
+      where: {
+        barCode: barcode,
+      },
+      relations: ['product'],
+    });
+
+    if (!barcodeExist || barcodeExist.isActive === false) {
+      throw new NotFoundException('Product not found.');
+    }
+
+    const prod = await this.productRepository.findOne({
+      where: {
+        id: barcodeExist.id_product,
+      },
+      relations: ['barcode', 'price'],
+    });
+
+    if (!prod) {
+      throw new NotFoundException('Product not found.');
+    }
+
+    console.log('Searching for barcode:', barcode);
+    console.log('Barcode found:', barcodeExist);
+    console.log('Product ID:', barcodeExist.id_product);
+
+    return prod;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} price`;
-  }
-
-  update(id: number, updatePriceDto: UpdatePriceDto) {
-    return `This action updates a #${id} price`;
-  }
 
   remove(id: number) {
     return `This action removes a #${id} price`;

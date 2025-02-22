@@ -4,6 +4,7 @@ import {
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Product } from './product.entities';
 
@@ -26,4 +27,7 @@ export class Price {
 
   @CreateDateColumn()
   creatAt: Date;
+  
+  @UpdateDateColumn()
+    updateAt: Date;
 }
