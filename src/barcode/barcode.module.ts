@@ -4,10 +4,9 @@ import { BarcodeController } from './barcode.controller';
 import { BarCode } from 'src/entities/barcode.entities';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from 'src/entities/product.entities';
-import { Price } from 'src/entities/price.entities';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([BarCode, Product, Price])],
+  imports: [TypeOrmModule.forFeature([BarCode, Product])],
   controllers: [BarcodeController],
   providers: [BarcodeService],
   exports: [TypeOrmModule, BarcodeService],

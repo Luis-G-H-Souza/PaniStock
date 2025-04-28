@@ -6,8 +6,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Sale } from './sale.entities';
-import { Stock } from './stock.entities';
 
 export enum UserFunction {
   ADMIN = 'admin',
@@ -41,9 +39,4 @@ export class User {
   @UpdateDateColumn()
   updateAt: Date;
 
-  @OneToMany(() => Sale, (sale) => sale.user_id)
-  sales: Sale[];
-
-  @OneToMany(() => Stock, (stock) => stock.user_id)
-  stock: Stock;
 }

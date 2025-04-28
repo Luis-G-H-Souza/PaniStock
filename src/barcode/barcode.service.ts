@@ -10,9 +10,9 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { validateDigit1 } from 'src/products/utils/bcodeveri-digit1';
-import { validateDigit3 } from 'src/products/utils/bcodeveri-digit3';
-import { validateUPCEorEAN8 } from 'src/products/utils/bcodeveri-upce';
+import { validateDigit1 } from 'src/modules/products/utils/bcodeveri-digit1';
+import { validateDigit3 } from 'src/modules/products/utils/bcodeveri-digit3';
+import { validateUPCEorEAN8 } from 'src/modules/products/utils/bcodeveri-upce';
 
 @Injectable()
 export class BarcodeService {

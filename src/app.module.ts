@@ -1,30 +1,24 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ProductsModule } from './products/products.module';
-import { SalesModule } from './sales/sales.module';
-import { StockModule } from './stock/stock.module';
+import { ProductsModule } from './modules/products/products.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './entities/product.entities';
 import { DatabaseModule } from './database/data-source';
-import { Stock } from './entities/stock.entities';
 import { User } from './entities/user.entities';
 import { BarCode } from './entities/barcode.entities';
 import { BarcodeModule } from './barcode/barcode.module';
-import { PricesModule } from './prices/prices.module';
-import { Price } from './entities/price.entities';
+import { TruckModule } from './modules/truck/truck.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forFeature([Product, Stock, User, BarCode, Price]),
+    TypeOrmModule.forFeature([Product, User, BarCode]),
     DatabaseModule,
     ProductsModule,
-    SalesModule,
-    StockModule,
     BarcodeModule,
-    PricesModule,
+    TruckModule,
   ],
   controllers: [AppController],
   providers: [AppService],

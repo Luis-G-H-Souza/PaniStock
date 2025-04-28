@@ -5,12 +5,7 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 import * as dotenv from 'dotenv';
 import { User } from 'src/entities/user.entities';
 import { Product } from 'src/entities/product.entities';
-import { Sale } from 'src/entities/sale.entities';
-import { SaleItem } from 'src/entities/sales-item.entities';
-import { Stock } from 'src/entities/stock.entities';
-import { StockMoviment } from 'src/entities/stock-moviment.entities';
 import { BarCode } from 'src/entities/barcode.entities';
-import { Price } from 'src/entities/price.entities';
 
 dotenv.config();
 
@@ -24,12 +19,7 @@ export const dataSourceOptions: DataSourceOptions = {
   entities: [
     User,
     Product,
-    Sale,
-    SaleItem,
-    Stock,
-    StockMoviment,
     BarCode,
-    Price,
   ],
   synchronize: true,
   migrations: [__dirname + '/../migrations/*.ts'],

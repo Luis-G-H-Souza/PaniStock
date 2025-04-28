@@ -4,10 +4,9 @@ import { ProductsController } from './products.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from 'src/entities/product.entities';
 import { BarCode } from 'src/entities/barcode.entities';
-import { Price } from 'src/entities/price.entities';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Product, BarCode, Price])],
+  imports: [TypeOrmModule.forFeature([Product, BarCode])],
   controllers: [ProductsController],
   providers: [ProductsService],
   exports: [ProductsService],

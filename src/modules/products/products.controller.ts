@@ -12,7 +12,7 @@ import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { CreateBarcodeDto } from 'src/barcode/dto/create-barcode.dto';
-import { CreatePriceDto } from 'src/prices/dto/create-price.dto';
+
 
 @Controller('product')
 export class ProductsController {
@@ -22,12 +22,10 @@ export class ProductsController {
   async create(
     @Body() createProductDto: CreateProductDto,
     @Body() CreateBarcodeDto: CreateBarcodeDto,
-    @Body() CreatePriceDto: CreatePriceDto,
   ) {
     return this.productsService.create(
       createProductDto,
-      CreateBarcodeDto.barCode,
-      CreatePriceDto.price,
+      CreateBarcodeDto.barCode
     );
   }
 

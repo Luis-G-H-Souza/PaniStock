@@ -14,8 +14,8 @@ async function createDatabase() {
 
   try {
     await client.connect();
-    await client.query('CREATE DATABASE "smoke-track";');
-    console.log('Database smoke-track criado com sucesso!');
+    await client.query('CREATE DATABASE "panistock";');
+    console.log('Database panistock criado com sucesso!');
   } catch (error) {
     console.error('Erro ao criar o banco de dados:', error);
   } finally {

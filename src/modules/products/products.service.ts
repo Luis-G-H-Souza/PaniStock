@@ -10,10 +10,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from 'src/entities/product.entities';
 import { Repository } from 'typeorm';
 import { BarCode } from 'src/entities/barcode.entities';
-import { Price } from 'src/entities/price.entities';
-import { validateDigit1 } from 'src/products/utils/bcodeveri-digit1';
-import { validateDigit3 } from 'src/products/utils/bcodeveri-digit3';
-import { validateUPCEorEAN8 } from 'src/products/utils/bcodeveri-upce';
+import { validateDigit1 } from 'src/modules/products/utils/bcodeveri-digit1';
+import { validateDigit3 } from 'src/modules/products/utils/bcodeveri-digit3';
+import { validateUPCEorEAN8 } from 'src/modules/products/utils/bcodeveri-upce';
 
 @Injectable()
 export class ProductsService {
@@ -22,13 +21,11 @@ export class ProductsService {
     private readonly productRepository: Repository<Product>,
     @InjectRepository(BarCode)
     private readonly barcodeRepository: Repository<BarCode>,
-    @InjectRepository(Price)
-    private readonly priceRepository: Repository<Price>,
+   
   ) {}
   async create(
     createProductDto: CreateProductDto,
     barCode: string,
-    price: number,
   ) {
     if (typeof barCode !== 'string') {
       throw new Error(
@@ -74,13 +71,6 @@ export class ProductsService {
       throw new ConflictException('Product already registered.');
     }
 
-    const validPrice = price ?? 0;
-
-    if (validPrice <= 0) {
-      throw new BadRequestException(
-        'The price cannot be negative, null or empty.',
-      );
-    }
 
     const product = await this.productRepository.create({
       ...createProductDto,
@@ -96,25 +86,17 @@ export class ProductsService {
     });
     await this.barcodeRepository.save(barcodeEntitie);
 
-    const priceEntitie = await this.priceRepository.create({
-      price,
-      id_product: product.id,
-      product: saveProduct,
-    });
-
-    await this.priceRepository.save(priceEntitie);
-
     return {
       product: saveProduct,
       barcode: barcodeEntitie,
-      price: priceEntitie,
+  
     };
   }
 
   async findAll() {
     const list = this.productRepository.find({
       where: { isActive: true },
-      relations: ['barcode', 'price'],
+      relations: ['barcode'],
     });
     return list;
   }
@@ -160,7 +142,7 @@ export class ProductsService {
 
     return this.productRepository.createQueryBuilder('product')
       .leftJoinAndSelect('product.barcode', 'barcode')
-      .leftJoinAndSelect('product.price', 'price')
+  
       .where('product.name ILIKE :name', { name: `%${name}%` })
       .orWhere('barcode.barCode ILIKE :barcode', { barcode: `${barcode}%` })
       .orderBy('product.name', 'ASC') // Ordena em ordem alfabética crescente (A-Z)
@@ -183,7 +165,7 @@ export class ProductsService {
       where: {
         id: barcodeExist.id_product,
       },
-      relations: ['barcode', 'price'],
+      relations: ['barcode',],
     });
 
     if (!prod) {
@@ -212,7 +194,7 @@ export class ProductsService {
       where: {
         id: barcodeExist.id_product,
       },
-      relations: ['barcode', 'price'],
+      relations: ['barcode',],
     });
 
     if (!prod) {

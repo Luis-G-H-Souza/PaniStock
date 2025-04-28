@@ -7,16 +7,17 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { BarCode } from './barcode.entities';
-@Entity('product')
-export class Product {
-  @PrimaryGeneratedColumn()
-  id: number;
-  @OneToMany(() => BarCode, (barcode) => barcode.product)
-  barcode: BarCode[];
+@Entity('truck')
+export class Truck {
 
   @Column()
-  name: string;
+  plate: string;
+
+  @Column()
+  driver: string;
+
+  @Column({ nullable: true })
+  capacity?: string;
 
   @CreateDateColumn()
   creatAt: Date;
@@ -29,4 +30,5 @@ export class Product {
 
   @Column({ type: 'boolean', default: true })
   isActive: boolean;
+
 }
