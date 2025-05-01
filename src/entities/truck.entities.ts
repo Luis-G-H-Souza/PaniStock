@@ -9,26 +9,39 @@ import {
 
 @Entity('truck')
 export class Truck {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @Column()
+  @Column({ unique: true })
   plate: string;
 
-  @Column()
-  driver: string;
+  @Column({ nullable: true })
+  model?: string;
+  
+  @Column({ nullable: true })
+  brand?: string;
 
   @Column({ nullable: true })
   capacity?: string;
 
-  @CreateDateColumn()
-  creatAt: Date;
-
-  @UpdateDateColumn()
-  updateAt: Date;
-
   @Column({ nullable: true })
   description?: string;
 
+  @Column({ type: 'enum', enum: ['OWNED', 'CLIENT', 'CARRIER'], default: 'OWNED' })
+  ownership_type: 'OWNED' | 'CLIENT' | 'CARRIER';
+
+  @Column({ type: 'boolean', default: false })
+  in_maintenance: boolean;
+
+  @Column({ type: 'timestamp', nullable: true })
+  last_maintenance_at?: Date;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
   @Column({ type: 'boolean', default: true })
   isActive: boolean;
-
 }

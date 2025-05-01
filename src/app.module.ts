@@ -9,7 +9,8 @@ import { DatabaseModule } from './database/data-source';
 import { User } from './entities/user.entities';
 import { BarCode } from './entities/barcode.entities';
 import { BarcodeModule } from './barcode/barcode.module';
-import { TruckModule } from './modules/truck/truck.module';
+import { TruckModule } from './modules/romaneio/truck/truck.module';
+import { ClientModule } from './modules/romaneio/client/client.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { TruckModule } from './modules/truck/truck.module';
     ProductsModule,
     BarcodeModule,
     TruckModule,
+    ClientModule,
   ],
   controllers: [AppController],
   providers: [AppService],
