@@ -11,7 +11,7 @@ import { BarCode } from './barcode.entities';
 @Entity('product')
 export class Product {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
   @OneToMany(() => BarCode, (barcode) => barcode.product)
   barcode: BarCode[];
 

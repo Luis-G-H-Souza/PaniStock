@@ -11,7 +11,7 @@ import { Product } from './product.entities';
 @Entity('bar-code')
 export class BarCode {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
   barCode: string;
