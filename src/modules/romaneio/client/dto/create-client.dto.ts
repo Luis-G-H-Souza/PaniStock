@@ -1,7 +1,13 @@
 import { Type } from "class-transformer";
-import { ArrayMaxSize, ArrayMinSize, IsArray, IsString, ValidateNested } from "class-validator";
+import { ArrayMaxSize, ArrayMinSize, IsArray, IsNotEmpty, IsOptional, IsPhoneNumber, IsString, Matches, ValidateNested } from "class-validator";
 
-class AddressDto {
+export class CepLookupDto {
+  @IsNotEmpty()
+  @Matches(/^\d{5}-?\d{3}$/, { message: 'CEP inválido' })
+  zip_code: string;
+}
+
+export class AddressDto {
   @IsString()
   street: string;
 
@@ -17,6 +23,7 @@ class AddressDto {
   @IsString()
   state: string;
 
+  @IsNotEmpty()
   @IsString()
   zip_code: string;
 }
@@ -24,15 +31,19 @@ class AddressDto {
 
 export class CreateClientDto {
 
+  @IsNotEmpty()
   @IsString()
   document: string;
 
+  @IsNotEmpty()
   @IsString()
   socialReason: string;
 
+  @IsNotEmpty()
   @IsString()
   fantasyName: string;
 
+  @IsNotEmpty()
   @IsString()
   phone: string;
 
@@ -43,7 +54,8 @@ export class CreateClientDto {
   @Type(() => AddressDto)
   address: AddressDto[];
 
+  @IsOptional()
   @IsString()
-  region: string;
+  region?: string;
 
 }

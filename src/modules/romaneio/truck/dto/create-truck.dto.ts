@@ -23,7 +23,7 @@ export class CreateTruckDto {
   ownership_type: 'OWNED' | 'CLIENT' | 'CARRIER';
 
   @ValidateIf((o) => o.ownership_type !== 'OWNED')
-  @IsNotEmpty({ message: 'Ownership name is required when truck is not OWNED' })
+  @IsNotEmpty({ message: 'ownership_name is required when truck is not OWNED' })
   @IsString()
   ownership_name?: string;
 

@@ -19,11 +19,11 @@ export class Client {
   @Column()
   phone: string;
     
-  @OneToMany(() => Address, (address) => address.client, { cascade: true })
+  @OneToMany(() => Address, (address) => address.client, { cascade: true, eager: true })
   address: Address[];
     
-  @Column()
-  region: string;
+  @Column({ nullable: true})
+  region?: string;
   
   @CreateDateColumn()
   creatAt: Date;
