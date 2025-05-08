@@ -9,6 +9,7 @@ import { DatabaseModule } from './database/data-source';
 import { User } from './entities/user.entities';
 import { TruckModule } from './modules/romaneio/truck/truck.module';
 import { ClientModule } from './modules/romaneio/client/client.module';
+import { OrderModule } from './modules/romaneio/order/order.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ClientModule } from './modules/romaneio/client/client.module';
     ProductsModule,
     TruckModule,
     ClientModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],
