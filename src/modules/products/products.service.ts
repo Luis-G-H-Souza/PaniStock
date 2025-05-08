@@ -9,7 +9,6 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from 'src/entities/product.entities';
 import { Repository } from 'typeorm';
-import { BarCode } from 'src/entities/barcode.entities';
 import { validateDigit1 } from 'src/modules/products/utils/bcodeveri-digit1';
 import { validateDigit3 } from 'src/modules/products/utils/bcodeveri-digit3';
 import { validateUPCEorEAN8 } from 'src/modules/products/utils/bcodeveri-upce';
@@ -19,32 +18,21 @@ export class ProductsService {
   constructor(
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
-    @InjectRepository(BarCode)
-    private readonly barcodeRepository: Repository<BarCode>,
    
   ) {}
   async create(
-    createProductDto: CreateProductDto,
-    barCode: string,
+    createProductDto: CreateProductDto
   ) {
-    if (typeof barCode !== 'string') {
-      throw new Error(
-        `Invalid barcode: Expected string, but got ${typeof barCode}`,
-      );
-    }
-
-    if (!barCode /*|| barCode.trim() === ""*/) {
-      throw new BadRequestException('barCode cannot be empty.');
-    }
+    
 
     let validBCode: boolean;
 
-    if (/^\d{13}$/.test(barCode) || /^\d{14}$/.test(barCode)) {
-      validBCode = validateDigit1(barCode);
-    } else if (/^\d{12}$/.test(barCode)) {
-      validBCode = validateDigit3(barCode);
-    } else if (/^\d{8}$/.test(barCode)) {
-      validBCode = validateUPCEorEAN8(barCode);
+    if (/^\d{13}$/.test(createProductDto.barCode) || /^\d{14}$/.test(createProductDto.barCode)) {
+      validBCode = validateDigit1(createProductDto.barCode);
+    } else if (/^\d{12}$/.test(createProductDto.barCode)) {
+      validBCode = validateDigit3(createProductDto.barCode);
+    } else if (/^\d{8}$/.test(createProductDto.barCode)) {
+      validBCode = validateUPCEorEAN8(createProductDto.barCode);
     } else {
       throw new BadRequestException(
         'Invalid barcode format. Must be 8, 12, 13 or 14 digits.',
@@ -61,13 +49,8 @@ export class ProductsService {
       },
     });
 
-    const codeExist = await this.barcodeRepository.findOne({
-      where: {
-        barCode,
-      },
-    });
 
-    if (prodExist || codeExist) {
+    if (prodExist) {
       throw new ConflictException('Product already registered.');
     }
 
@@ -79,24 +62,14 @@ export class ProductsService {
 
     const saveProduct = await this.productRepository.save(product);
 
-    const barcodeEntitie = await this.barcodeRepository.create({
-      barCode,
-      id_product: product.id,
-      product: saveProduct,
-    });
-    await this.barcodeRepository.save(barcodeEntitie);
-
     return {
-      product: saveProduct,
-      barcode: barcodeEntitie,
-  
+      product: saveProduct
     };
   }
 
   async findAll() {
     const list = this.productRepository.find({
-      where: { isActive: true },
-      relations: ['barcode'],
+      where: { isActive: true }
     });
     return list;
   }
@@ -150,60 +123,11 @@ export class ProductsService {
       .getMany();
   }
 
-  async update(barcode: string, updateProductDto: UpdateProductDto) {
-    const barcodeExist = await this.barcodeRepository.findOne({
-      where: {
-        barCode: barcode,
-      },
-    });
+  async update(updateProductDto: UpdateProductDto) {
 
-    if (!barcodeExist) {
-      throw new NotFoundException('Product not found.');
-    }
-
-    const prod = await this.productRepository.findOne({
-      where: {
-        id: barcodeExist.id_product,
-      },
-      relations: ['barcode',],
-    });
-
-    if (!prod) {
-      throw new NotFoundException('Product not found.');
-    }
-
-    await this.productRepository.update(prod.id, {
-      ...updateProductDto,
-      updateAt: new Date(),
-    });
-    return updateProductDto;
   }
 
   async remove(barcode: string) {
-    const barcodeExist = await this.barcodeRepository.findOne({
-      where: {
-        barCode: barcode,
-      },
-    });
-
-    if (!barcodeExist) {
-      throw new NotFoundException('Product not found.');
-    }
-
-    const prod = await this.productRepository.findOne({
-      where: {
-        id: barcodeExist.id_product,
-      },
-      relations: ['barcode',],
-    });
-
-    if (!prod) {
-      throw new NotFoundException('Product not found.');
-    }
-    await this.productRepository.update(prod.id, {
-      isActive: false,
-      updateAt: new Date(),
-    });
     return;
   }
 }

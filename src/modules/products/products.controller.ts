@@ -11,7 +11,6 @@ import {
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { CreateBarcodeDto } from 'src/barcode/dto/create-barcode.dto';
 
 
 @Controller('product')
@@ -21,11 +20,9 @@ export class ProductsController {
   @Post()
   async create(
     @Body() createProductDto: CreateProductDto,
-    @Body() CreateBarcodeDto: CreateBarcodeDto,
   ) {
     return this.productsService.create(
-      createProductDto,
-      CreateBarcodeDto.barCode
+      createProductDto
     );
   }
 
@@ -34,27 +31,21 @@ export class ProductsController {
     return this.productsService.findAll();
   }
 
-  /*@Get(':barcode')
-  findOne(@Param('barcode') barcode: string) {
-    return this.productsService.findOne(barcode);
-  }
-  */
 
   @Get('search')
-  async searchProduct(@Query() query: {name?: string; barcode?: string }){
+  async searchProduct(@Query() query: {name?: string;}){
     return this.productsService.searchPorduct(query)
   }
 
-  @Patch(':barcode')
+  @Patch(':id')
   update(
-    @Param('barcode') barcode: string,
     @Body() updateProductDto: UpdateProductDto,
   ) {
-    return this.productsService.update(barcode, updateProductDto);
+    return this.productsService.update(updateProductDto);
   }
 
-  @Delete(':barcode')
-  remove(@Param('barcode') barcode: string) {
-    return this.productsService.remove(barcode);
+  @Delete(':id')
+   remove(@Param('id') id: string) {
+    return this.productsService.remove(id);
   }
 }

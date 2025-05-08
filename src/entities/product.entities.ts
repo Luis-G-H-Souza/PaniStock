@@ -7,14 +7,10 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { BarCode } from './barcode.entities';
-@Entity('product')
 export class Product {
   @PrimaryGeneratedColumn()
   id: string;
-  @OneToMany(() => BarCode, (barcode) => barcode.product)
-  barcode: BarCode[];
-
+  
   @Column()
   name: string;
 
