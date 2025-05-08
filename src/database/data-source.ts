@@ -5,7 +5,9 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 import * as dotenv from 'dotenv';
 import { User } from 'src/entities/user.entities';
 import { Product } from 'src/entities/product.entities';
-import { BarCode } from 'src/entities/barcode.entities';
+import { Truck } from 'src/entities/truck.entities';
+import { Client } from 'src/entities/client.entities';
+import { Address } from 'src/entities/address.entities';
 
 dotenv.config();
 
@@ -19,12 +21,14 @@ export const dataSourceOptions: DataSourceOptions = {
   entities: [
     User,
     Product,
-    BarCode,
+    Truck,
+    Client,
+    Address
   ],
   synchronize: true,
   migrations: [__dirname + '/../migrations/*.ts'],
   logging: true,
-  //dropSchema: true,
+  dropSchema: true,
 };
 
 export const AppDataSource = new DataSource(dataSourceOptions);

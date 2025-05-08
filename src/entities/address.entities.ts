@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { Client } from './client.entities'
 @Entity()
 export class Address {
@@ -22,6 +22,15 @@ export class Address {
 
   @Column()
   zip_code: string;
+
+  @CreateDateColumn()
+    creatAt: Date;
+    
+  @UpdateDateColumn()
+  updateAt: Date;
+  
+  @Column({ type: 'boolean', default: true })
+  isActive: boolean;
 
   @ManyToOne(() => Client, (client) => client.address)
   client: Client;
