@@ -30,6 +30,9 @@ export class Truck {
   @Column({ type: 'enum', enum: ['OWNED', 'CLIENT', 'CARRIER'], default: 'OWNED' })
   ownership_type: 'OWNED' | 'CLIENT' | 'CARRIER';
 
+  @Column({ nullable: true })
+  ownership_name?: string;
+
   @Column({ type: 'boolean', default: false })
   in_maintenance: boolean;
 

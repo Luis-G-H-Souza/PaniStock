@@ -9,38 +9,39 @@ import { InjectRepository } from '@nestjs/typeorm';
 export class TruckService {
   constructor(
     @InjectRepository(Truck)
-    private readonly productRepository: Repository<Truck>,
+    private readonly truckRepository: Repository<Truck>,
   )
   {}
   async create(createTruckDto: CreateTruckDto) {
 
-    const truckExist = await this.productRepository.findOne({
+    const truckExist = await this.truckRepository.findOne({
       where: {
         plate: createTruckDto.plate,
       },
     });
     
     if (truckExist) {
-      throw new ConflictException('Product already registered.');
+      throw new ConflictException('Truck already registered.');
     }
 
-    if (createTruckDto.ownership_type == 'OWNED'){
-      createTruckDto.ownership_name = 'PANIBRASIL'
-    }
+    const ownership_name = createTruckDto.ownership_type === 'OWNED'
+    ? 'PANIBRASIL'
+    : createTruckDto.ownership_name;
 
-    const truck = await this.productRepository.create({
-      ...createTruckDto,
-      created_at: new Date(),
-    });
+  const truck = this.truckRepository.create({
+    ...createTruckDto,
+    ownership_name,
+    created_at: new Date(),
+  });
 
-    const saveTruck = await this.productRepository.save(truck);
+    const saveTruck = await this.truckRepository.save(truck);
 
     
     return saveTruck;
   }
 
    async findAll() {
-    const list = this.productRepository.find({
+    const list = this.truckRepository.find({
       where: { isActive: true },
     });
     return list;
