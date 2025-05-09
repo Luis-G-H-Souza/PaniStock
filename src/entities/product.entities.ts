@@ -2,15 +2,21 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
+@Entity('product')
 export class Product {
   @PrimaryGeneratedColumn()
   id: string;
   
+  @Column()
+  barCode: string
+  
+  @Column()
+  productCode: string;
+
   @Column()
   name: string;
 

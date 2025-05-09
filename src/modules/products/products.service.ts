@@ -45,7 +45,7 @@ export class ProductsService {
 
     const prodExist = await this.productRepository.findOne({
       where: {
-        name: createProductDto.name,
+        barCode: createProductDto.barCode,
       },
     });
 
@@ -55,7 +55,7 @@ export class ProductsService {
     }
 
 
-    const product = await this.productRepository.create({
+    const product = this.productRepository.create({
       ...createProductDto,
       creatAt: new Date(),
     });
@@ -63,6 +63,7 @@ export class ProductsService {
     const saveProduct = await this.productRepository.save(product);
 
     return {
+      message: 'Product created successfully',
       product: saveProduct
     };
   }
