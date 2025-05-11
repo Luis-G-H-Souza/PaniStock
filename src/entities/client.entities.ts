@@ -1,6 +1,7 @@
 
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Address } from "./address.entities";
+import { Order } from "./order.entities";
 
 @Entity('client')
 export class Client {
@@ -24,6 +25,9 @@ export class Client {
     
   @Column({ nullable: true})
   region?: string;
+
+  @OneToMany(() => Order, (order) => order.client, { cascade: true, eager: true })
+  orders: Order;
   
   @CreateDateColumn()
   creatAt: Date;
