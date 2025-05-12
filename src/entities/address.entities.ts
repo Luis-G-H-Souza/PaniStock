@@ -23,15 +23,15 @@ export class Address {
   @Column()
   zip_code: string;
 
-  @CreateDateColumn()
-    creatAt: Date;
-    
-  @UpdateDateColumn()
-  updateAt: Date;
-  
-  @Column({ type: 'boolean', default: true })
-  isActive: boolean;
-
   @ManyToOne(() => Client, (client) => client.address)
   client: Client;
+
+  @CreateDateColumn()
+  creatAt: Date;
+  
+  @UpdateDateColumn()
+  updateAt: Date;
+
+  @Column({ type: 'boolean', default: true })
+  isActive: boolean;
 }

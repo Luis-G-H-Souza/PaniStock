@@ -31,7 +31,7 @@ export class TruckService {
   const truck = this.truckRepository.create({
     ...createTruckDto,
     ownership_name,
-    created_at: new Date(),
+    creatAt: new Date(),
   });
 
     const saveTruck = await this.truckRepository.save(truck);

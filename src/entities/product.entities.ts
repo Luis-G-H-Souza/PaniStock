@@ -20,14 +20,14 @@ export class Product {
   @Column()
   name: string;
 
-  @CreateDateColumn()
-  creatAt: Date;
-
-  @UpdateDateColumn()
-  updateAt: Date;
-
   @Column({ nullable: true })
   description?: string;
+
+ @CreateDateColumn()
+  creatAt: Date;
+  
+  @UpdateDateColumn()
+  updateAt: Date;
 
   @Column({ type: 'boolean', default: true })
   isActive: boolean;

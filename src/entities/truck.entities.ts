@@ -40,10 +40,10 @@ export class Truck {
   last_maintenance_at?: Date;
 
   @CreateDateColumn()
-  created_at: Date;
-
+  creatAt: Date;
+  
   @UpdateDateColumn()
-  updated_at: Date;
+  updateAt: Date;
 
   @Column({ type: 'boolean', default: true })
   isActive: boolean;

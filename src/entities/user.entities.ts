@@ -34,9 +34,12 @@ export class User {
   function: UserFunction;
 
   @CreateDateColumn()
-  createAt: Date;
-
+  creatAt: Date;
+  
   @UpdateDateColumn()
   updateAt: Date;
+
+  @Column({ type: 'boolean', default: true })
+  isActive: boolean;
 
 }
