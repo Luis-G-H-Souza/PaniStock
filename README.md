@@ -1,37 +1,60 @@
-# Smoke Track API
+# Panistock – Sistema de Controle Logístico de Carregamento de Caminhões
 
-### Descrição
+## 📦 Descrição
 
-Smoke Track é uma Aplicação de Gestão Empresarial (ERP - Enterprise Resource Planning) desenvolvido em Node.js utilizando o framework Nest.js, destinado à gestão de vendas e estoque de uma empresa.
+**Panistock** é uma API desenvolvida com Node.js e NestJS que tem como objetivo otimizar o processo logístico de **carregamento de caminhões**. O sistema permite:
 
-O serviço disponibiliza soluções para:
+- Cadastrar **pedidos** e **clientes**;
+- Registrar **caminhões** que realizarão as entregas;
+- Criar e gerenciar **romaneios**, que organizam quais caminhões entregarão quais pedidos;
+- Registrar os **eventos operacionais do carregamento** (chegada, início, fim, saída), otimizando o tempo e controle do pátio.
 
-- Cadastro de usuários: gestão dos usuários do sistema com login e senha para acesso,
-- Cadastro de vendas: registro de vendas efetuadas na loja.
-- Cadastro de produtos: registro dos produtos disponíveis para venda.
-- Gerenciamento de estoque: endpoints dedicados à administração do estoque da loja.
+O projeto é voltado para empresas que lidam com expedição e transporte de cargas e busca fornecer controle, rastreabilidade e eficiência em tempo real ou planejado.
 
-### Tecnologias Utilizadas:
+---
 
-- Node.js - ambiente de desenvolvimento.
-- Nest.js - Framework para criação da API.
-- PostgreSQL - banco de dados relacional.
-- TypeORM - ORM para mapeamento de entidades no banco de dados.
-- ESLint - para padronização e qualidade do código.
-- Swagger - para documentação interativa das APIs.
-- Supertest - para realização de teste e2e.
+## 🚀 Funcionalidades
 
-## Iniciando o sistema
+- ✅ Cadastro de clientes e pedidos
+- ✅ Cadastro de caminhões
+- ✅ Registro de eventos logísticos:
+  - Chegada do caminhão
+  - Início do carregamento
+  - Término do carregamento
+  - Saída do caminhão
+- ✅ Criação de romaneios com associação entre caminhões e pedidos
+- 🔄 (Em desenvolvimento) Geração automática de romaneios com base nos CEPs dos clientes
+- 🔐 Autenticação de usuários e controle de acesso
 
-Requisitos:
+---
 
-Previamente deve-se instalar o ambiente de desenvolvimento [Node.Js](https://nodejs.org/pt) e o banco de dados [PostgreSQL](https://www.postgresql.org/).
+## 🛠️ Tecnologias Utilizadas
 
-No banco de dados criamos um banco de dados com o nome `smoke-track`.
+- **Node.js** – Ambiente de execução JavaScript
+- **NestJS** – Framework backend modular e escalável
+- **PostgreSQL** – Banco de dados relacional
+- **TypeORM** – Mapeamento objeto-relacional
+- **Swagger** – Documentação e testes interativos de API
+- **Supertest** – Testes de integração (E2E)
+- **ESLint** – Padronização de código
 
-### Passo a Passo
+---
 
-1. Clone este repositório em sua máquina local.
+## 🖥️ Iniciando o Projeto Localmente
+
+### Requisitos
+
+- [Node.js](https://nodejs.org/pt)
+- [PostgreSQL](https://www.postgresql.org/)
+
+### Passos
+
+1. **Clone o repositório**
+
+```bash
+git clone https://github.com/Luis-G-H-Souza/panistock.git
+cd panistock
+```
 
 2. Na raiz do projeto, crie um arquivo `.env` com base no exemplo disponível em `.env.example`, adaptando os valores às configurações do seu ambiente.
 
@@ -41,7 +64,7 @@ No banco de dados criamos um banco de dados com o nome `smoke-track`.
  ts-node create-database.ts
 ```
 
-Este comando criará o banco de dados com o nome `smoke-track`.
+Este comando criará o banco de dados com o nome `panistock`.
 
 4. No terminal, navegue até a raiz do projeto e execute:
 
@@ -59,3 +82,14 @@ Isso instalará todas as dependências do projeto.
 
 6. Com o servidor em execução, acesse a documentação das APIs no navegador pelo endereço:
    http://localhost:3000/swagger
+
+### 📚 Observações
+
+Este projeto está em desenvolvimento e ainda não implementa todas as funcionalidades previstas para o MVP completo.
+
+Está sendo utilizado como estudo prático e também como primeiro projeto de portfólio para fins profissionais.
+
+### 📌 Autor
+
+Desenvolvido por Luis-G-H-Souza – Estudante autodidata em desenvolvimento back-end, com experiência prática adquirida por meio de estágio e projetos pessoais.
+Este projeto foi iniciado com o objetivo de atender necessidades reais da empresa onde trabalho, e também como passo inicial para atuar de forma profissional na área de desenvolvimento.
