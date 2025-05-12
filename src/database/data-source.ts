@@ -18,13 +18,7 @@ export const dataSourceOptions: DataSourceOptions = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: 'smoke-track',
-  entities: [
-    User,
-    Product,
-    Truck,
-    Client,
-    Address
-  ],
+  entities: [__dirname + '/../**/*.entities.{ts,js}'],
   synchronize: true,
   migrations: [__dirname + '/../migrations/*.ts'],
   logging: true,

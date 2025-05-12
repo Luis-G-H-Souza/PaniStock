@@ -8,10 +8,10 @@ export class OrderItem {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @OneToMany(() => Order, (order) => order.itens, { cascade: true, eager: true })
+  @ManyToOne(() => Order, (order) => order.itens)
   orders: Order;
 
-  @ManyToOne(() => Product, { eager: true })
+  @ManyToOne(() => Product,)
   product: Product;
 
   @Column('int')

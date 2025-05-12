@@ -28,7 +28,7 @@ export class CreateOrderDto {
   @IsNotEmpty()
   @IsDate()
   @Type(() => Date)
-  arrivalDate: Date;
+  truckarrivalDate: Date;
 
   @IsNotEmpty()
   @IsDate()
