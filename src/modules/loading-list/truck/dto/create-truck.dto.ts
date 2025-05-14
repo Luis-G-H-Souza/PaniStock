@@ -1,4 +1,5 @@
-import { IsBoolean, IsDateString, IsIn, IsNotEmpty, IsOptional, IsString, Matches, ValidateIf } from "class-validator";
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, Matches, ValidateIf } from "class-validator";
+import { CapacityType, OwnershipType } from "src/entities/truck.entities";
 
 export class CreateTruckDto {
 
@@ -19,8 +20,8 @@ export class CreateTruckDto {
   brand?: string;
 
   @IsNotEmpty()
-  @IsIn(['OWNED', 'CLIENT', 'CARRIER'])
-  ownership_type: 'OWNED' | 'CLIENT' | 'CARRIER';
+  @IsEnum(OwnershipType)
+  ownership_type: OwnershipType;
 
   @ValidateIf((o) => o.ownership_type !== 'OWNED')
   @IsNotEmpty({ message: 'ownership_name is required when truck is not OWNED' })
@@ -28,7 +29,11 @@ export class CreateTruckDto {
   ownership_name?: string;
 
   @IsOptional()
-  @IsString()
-  capacity?: string;
+  @IsEnum(CapacityType)
+  type_capacity: CapacityType;
+
+  @IsNotEmpty()
+  @IsNumber()
+  capacity: number;
 
 }
