@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Client } from "./client.entities";
 import { OrderItem } from "./orderitens.entities";
+import { LoadingList } from "./loadinglist.entities";
 
 export enum OrderStatus{
   OPEN = 'open',
@@ -19,6 +20,9 @@ export class Order{
 
   @OneToMany(() => OrderItem, (item) => item.orders, { cascade: true, eager: true })
   itens: OrderItem[];
+
+  @ManyToOne(() => LoadingList, (loadinglist) => loadinglist.order)
+  loadinglist: LoadingList;
 
   @Column({ type: 'timestamp' })
   truckarrivalDate: Date;

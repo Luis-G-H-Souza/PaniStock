@@ -3,9 +3,11 @@ import {
   CreateDateColumn,
   Entity,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { LoadingList } from './loadinglist.entities';
 
 @Entity('truck')
 export class Truck {
@@ -38,6 +40,9 @@ export class Truck {
 
   @Column({ type: 'timestamp', nullable: true })
   last_maintenance_at?: Date;
+
+  @OneToOne(() => LoadingList, (loadinglist) => loadinglist.truck)
+  loadinglist: LoadingList
 
   @CreateDateColumn()
   creatAt: Date;
