@@ -57,7 +57,7 @@ export class ProductsService {
 
     const product = this.productRepository.create({
       ...createProductDto,
-      creatAt: new Date(),
+      createdAt: new Date(),
     });
 
     const saveProduct = await this.productRepository.save(product);

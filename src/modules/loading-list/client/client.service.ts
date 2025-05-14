@@ -38,7 +38,7 @@ export class ClientService {
 
     const client = this.clientRepository.create({
       ...createClientDto,
-      creatAt: new Date(),
+      createdAt: new Date(),
       address: address.map(addr => this.addressRepository.create(addr))
     })
     const saveClient = this.clientRepository.save(client)

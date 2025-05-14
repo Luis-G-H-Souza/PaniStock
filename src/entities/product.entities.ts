@@ -24,10 +24,10 @@ export class Product {
   description?: string;
 
  @CreateDateColumn()
-  creatAt: Date;
+  createdAt: Date;
   
   @UpdateDateColumn()
-  updateAt: Date;
+  updatedAt: Date;
 
   @Column({ type: 'boolean', default: true })
   isActive: boolean;

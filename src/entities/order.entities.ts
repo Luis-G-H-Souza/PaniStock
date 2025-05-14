@@ -34,10 +34,10 @@ export class Order{
   status: string; // Mudar para ENUM Ex: 'Aguardando', 'Em transporte', 'Entregue'
 
   @CreateDateColumn()
-  creatAt: Date;
+  createdAt: Date;
   
   @UpdateDateColumn()
-  updateAt: Date;
+  updatedAt: Date;
 
   @Column({ type: 'boolean', default: true })
   isActive: boolean;

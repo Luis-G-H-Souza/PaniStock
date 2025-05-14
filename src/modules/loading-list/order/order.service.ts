@@ -85,7 +85,7 @@ export class OrderService {
 
     const order = await this.orderRepository.create({
       ...createOrderDto,
-      creatAt: new Date(),
+      createdAt: new Date(),
       itens: itens.map(it => this.orderItemRepository.create(it))
     })
 
