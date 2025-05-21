@@ -94,8 +94,13 @@ export class OrderService {
     return saveOrder;
   }
 
-  findAll() {
-    return `This action returns all order`;
+  async findAll() {
+    const list = this.orderRepository.find({
+      where: {
+        isActive: true,
+      }
+    });
+    return list;
   }
 
   findOne(id: number) {
