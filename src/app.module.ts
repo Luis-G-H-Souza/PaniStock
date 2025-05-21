@@ -10,6 +10,7 @@ import { User } from './entities/user.entities';
 import { TruckModule } from './modules/loading-list/truck/truck.module';
 import { ClientModule } from './modules/loading-list/client/client.module';
 import { OrderModule } from './modules/loading-list/order/order.module';
+import { LoadingListModule } from './modules/loading-list/loading-list/loading-list.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { OrderModule } from './modules/loading-list/order/order.module';
     TruckModule,
     ClientModule,
     OrderModule,
+    LoadingListModule,
   ],
   controllers: [AppController],
   providers: [AppService],
