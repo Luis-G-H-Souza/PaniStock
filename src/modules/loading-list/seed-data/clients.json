@@ -1,0 +1,87 @@
+[
+  {
+    "document": "12345678000195",
+    "socialReason": "Panificadora São José Ltda",
+    "fantasyName": "PaniSão",
+    "phone": "+55 11 98765-4321",
+    "address": [
+      {
+        "street": "Rua das Flores",
+        "number": "123",
+        "neighborhood": "Centro",
+        "city": "São Paulo",
+        "state": "SP",
+        "zip_code": "01001-000"
+      }
+    ],
+    "region": "Zona Sul"
+  },
+  {
+    "document": "98765432000100",
+    "socialReason": "Supermercado Alvorada EIRELI",
+    "fantasyName": "Super Alvorada",
+    "phone": "+55 21 99876-1234",
+    "address": [
+      {
+        "street": "Avenida Brasil",
+        "number": "4567",
+        "neighborhood": "Bonsucesso",
+        "city": "Rio de Janeiro",
+        "state": "RJ",
+        "zip_code": "21040-361"
+      }
+    ],
+    "region": "Zona Norte"
+  },
+  {
+    "document": "33445566000122",
+    "socialReason": "Distribuidora Vale Verde ME",
+    "fantasyName": "Vale Verde",
+    "phone": "+55 31 91234-5678",
+    "address": [
+      {
+        "street": "Rua da Liberdade",
+        "number": "89",
+        "neighborhood": "Savassi",
+        "city": "Belo Horizonte",
+        "state": "MG",
+        "zip_code": "30130-140"
+      }
+    ],
+    "region": "Centro"
+  },
+  {
+    "document": "11223344000177",
+    "socialReason": "Empório do Sul Ltda",
+    "fantasyName": "Empório Sul",
+    "phone": "+55 51 99999-8888",
+    "address": [
+      {
+        "street": "Rua das Palmeiras",
+        "number": "22",
+        "neighborhood": "Menino Deus",
+        "city": "Porto Alegre",
+        "state": "RS",
+        "zip_code": "90110-001"
+      }
+    ],
+    "region": "Zona Central"
+  },
+  {
+    "document": "55667788000133",
+    "socialReason": "Mercadinho do Povo Ltda",
+    "fantasyName": "Mercadinho Povo",
+    "phone": "+55 85 98765-4321",
+    "address": [
+      {
+        "street": "Rua do Sol",
+        "number": "789",
+        "neighborhood": "Aldeota",
+        "city": "Fortaleza",
+        "state": "CE",
+        "zip_code": "60110-050"
+      }
+    ],
+    "region": "Leste"
+  }
+]

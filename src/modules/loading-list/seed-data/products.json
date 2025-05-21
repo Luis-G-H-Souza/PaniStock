@@ -1,0 +1,37 @@
+[
+  {
+    "barCode": "7894900010015",
+    "productCode": "PDT001",
+    "name": "Farinha de Trigo Premium 5kg",
+    "quantBox": 10,
+    "description": "Farinha especial para panificação"
+  },
+  {
+    "barCode": "7891910000197",
+    "productCode": "PDT002",
+    "name": "Açúcar Refinado 1kg",
+    "quantBox": 20,
+    "description": "Açúcar branco refinado"
+  },
+  {
+    "barCode": "7896004000018",
+    "productCode": "PDT003",
+    "name": "Óleo de Soja 900ml",
+    "quantBox": 12,
+    "description": "Óleo vegetal para uso geral"
+  },
+  {
+    "barCode": "7891991000011",
+    "productCode": "PDT004",
+    "name": "Fermento Biológico Seco 500g",
+    "quantBox": 24,
+    "description": "Fermento seco instantâneo"
+  },
+  {
+    "barCode": "7891079000103",
+    "productCode": "PDT005",
+    "name": "Leite Integral UHT 1L",
+    "quantBox": 12,
+    "description": "Leite longa vida"
+  }
+]

@@ -1,0 +1,45 @@
+[
+  {
+    "plate": "ABC-1234",
+    "model": "Constellation 24.280",
+    "brand": "Volkswagen",
+    "ownership_type": "OWNED",
+    "type_capacity": "PALLETS",
+    "capacity": 28
+  },
+  {
+    "plate": "DEF-1C34",
+    "model": "Actros 2651",
+    "brand": "Mercedes-Benz",
+    "ownership_type": "CLIENT",
+    "ownership_name": "Transportadora Rio Verde",
+    "type_capacity": "PALLETS",
+    "capacity": 30
+  },
+  {
+    "plate": "GHI-2345",
+    "model": "FH 540",
+    "brand": "Volvo",
+    "ownership_type": "CARRIER",
+    "ownership_name": "LocaTruck",
+    "type_capacity": "PALLETS",
+    "capacity": 26
+  },
+  {
+    "plate": "JKL-5D67",
+    "model": "Accelo 1016",
+    "brand": "Mercedes-Benz",
+    "ownership_type": "OWNED",
+    "type_capacity": "BOXES",
+    "capacity": 60
+  },
+  {
+    "plate": "MNO-6789",
+    "model": "Delivery 9.170",
+    "brand": "Volkswagen",
+    "ownership_type": "CLIENT",
+    "ownership_name": "Expresso Sul Ltda",
+    "type_capacity": "PALLETS",
+    "capacity": 20
+  }
+]
