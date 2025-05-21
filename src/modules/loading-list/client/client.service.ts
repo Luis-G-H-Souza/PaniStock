@@ -71,8 +71,13 @@ export class ClientService {
     };
   }
 
-  findAll() {
-    return `This action returns all client`;
+  async findAll() {
+    const list = this.clientRepository.find({
+      where: {
+        isActive: true,
+      }
+    });
+    return list;
   }
 
   findOne(id: number) {

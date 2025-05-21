@@ -70,7 +70,9 @@ export class ProductsService {
 
   async findAll() {
     const list = this.productRepository.find({
-      where: { isActive: true }
+      where: {
+        isActive: true,
+      }
     });
     return list;
   }

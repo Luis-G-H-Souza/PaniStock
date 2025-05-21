@@ -42,7 +42,9 @@ export class TruckService {
 
    async findAll() {
     const list = this.truckRepository.find({
-      where: { isActive: true },
+      where: {
+        isActive: true,
+      }
     });
     return list;
   }
